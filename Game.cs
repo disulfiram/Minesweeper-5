@@ -1,10 +1,10 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-
 namespace Minesweeper
 {
-    class Game
+    using System;
+    using System.Collections.Generic;
+    using System.Text;
+
+    public class Game
     {
         private const int MaxRows = 5;
         private const int MaxColumns = 10;
@@ -13,6 +13,11 @@ namespace Minesweeper
 
         private static Board board;
         private static List<Player> topPlayers;
+
+        public static void Main(string[] args)
+        {
+            Menu();
+        }
 
         private static void InitializeGameBoard()
         {
@@ -39,10 +44,11 @@ namespace Minesweeper
                     return true;
                 }
             }
+
             return false;
         }
 
-        private static void topadd(ref Player player)
+        private static void TopAdd(ref Player player)
         {
             if (topPlayers.Capacity > topPlayers.Count)
             {
@@ -57,7 +63,7 @@ namespace Minesweeper
             }
         }
 
-        private static void top()
+        private static void Top()
         {
             Console.WriteLine("Scoreboard");
             for (int i = 0; i < topPlayers.Count; i++)
@@ -91,7 +97,7 @@ namespace Minesweeper
                 }
                 else if (str == "top")
                 {
-                    top();
+                    Top();
                 }
                 else if (str == "coordinates")
                 {
@@ -111,9 +117,10 @@ namespace Minesweeper
                                 Console.WriteLine("Please enter your name for the top scoreboard: ");
                                 string name = Console.ReadLine();
                                 Player player = new Player(name, score);
-                                topadd(ref player);
-                                top();
+                                TopAdd(ref player);
+                                Top();
                             }
+
                             str = "restart";
                             continue;
                         }
@@ -131,10 +138,12 @@ namespace Minesweeper
                                 Console.WriteLine("Please enter your name for the top scoreboard: ");
                                 string name = Console.ReadLine();
                                 Player player = new Player(name, score);
-                                topadd(ref player);
-                                // pokazvame klasiraneto
-                                top();
+                                TopAdd(ref player);
+                                Top();
+                                TopAdd(ref player);
+                                Top();
                             }
+
                             str = "restart";
                             continue;
                         }
@@ -174,11 +183,6 @@ namespace Minesweeper
                     continue;
                 }
             }
-        }
-
-        static void Main(string[] args)
-        {
-            Menu();
         }
     }
 }
