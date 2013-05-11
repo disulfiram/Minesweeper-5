@@ -2,30 +2,29 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-//vsichko ba4ka, ne butaj!
-
 namespace Minesweeper
 {
     class Game
     {
-        private const int maxRows = 5;
-        private const int maxColumns = 10;
-        private const int maxMines = 15;
-        private const int maxTopPlayers = 5;
+        private const int MaxRows = 5;
+        private const int MaxColumns = 10;
+        private const int MaxMines = 15;
+        private const int MaxTopPlayers = 5;
 
         private static Board board;
         private static List<Player> topPlayers;
 
         private static void InitializeGameBoard()
         {
-            board = new Board(maxRows, maxColumns, maxMines);
-
+            board = new Board(MaxRows, MaxColumns, MaxMines);
         }
+
         private static void InitializeTopPlayers()
         {
             topPlayers = new List<Player>();
-            topPlayers.Capacity = maxTopPlayers;
+            topPlayers.Capacity = MaxTopPlayers;
         }
+
         private static bool CheckHighScores(int score)
         {
             if (topPlayers.Capacity > topPlayers.Count)
@@ -38,8 +37,6 @@ namespace Minesweeper
                 if (currentPlayer.Score < score)
                 {
                     return true;
-
-
                 }
             }
             return false;
@@ -58,8 +55,6 @@ namespace Minesweeper
                 topPlayers.Add(player);
                 topPlayers.Sort();
             }
-
-
         }
 
         private static void top()
@@ -80,15 +75,13 @@ namespace Minesweeper
 
             while (str != "exit")
             {
-
-
                 if (str == "restart")
                 {
                     InitializeGameBoard();
                     Console.WriteLine("Welcome to the game “Minesweeper”. " +
-                        "Try to reveal all cells without mines. " +
-                        "Use 'top' to view the scoreboard, 'restart' to start a new game" +
-                        "and 'exit' to quit the game.");
+                                      "Try to reveal all cells without mines. " +
+                                      "Use 'top' to view the scoreboard, 'restart' to start a new game" +
+                                      "and 'exit' to quit the game.");
                     board.PrintGameBoard();
                 }
                 else if (str == "exit")
@@ -102,8 +95,6 @@ namespace Minesweeper
                 }
                 else if (str == "coordinates")
                 {
-
-
                     try
                     {
                         Board.Status status = board.OpenField(choosenRow, chosenColumn);
@@ -112,8 +103,8 @@ namespace Minesweeper
                             board.PrintAllFields();
                             int score = board.CountOpenedFields();
                             Console.WriteLine("Booooom! You were killed by a mine. You revealed " +
-                                score +
-                                " cells without mines.");
+                                              score +
+                                              " cells without mines.");
 
                             if (CheckHighScores(score))
                             {
@@ -126,8 +117,6 @@ namespace Minesweeper
                             str = "restart";
                             continue;
                         }
-
-
                         else if (status == Board.Status.AlreadyOpened)
                         {
                             Console.WriteLine("Illegal move!");
@@ -144,15 +133,13 @@ namespace Minesweeper
                                 Player player = new Player(name, score);
                                 topadd(ref player);
                                 // pokazvame klasiraneto
-								top();
+                                top();
                             }
                             str = "restart";
                             continue;
                         }
                         else
                         {
-
-
                             board.PrintGameBoard();
                         }
                     }
@@ -172,8 +159,7 @@ namespace Minesweeper
                 }
                 catch
                 {
-
-					// niama smisal tuka
+                    // niama smisal tuka
                     continue;
                 }
 

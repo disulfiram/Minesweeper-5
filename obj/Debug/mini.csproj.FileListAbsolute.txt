@@ -3,3 +3,5 @@ C:\Users\Kao-PC\Documents\Repository\Telerik Academy Homeworks\High Quality Code
 C:\Users\Kao-PC\Documents\Repository\Telerik Academy Homeworks\High Quality Code\Teamwork\Minesweeper-5\obj\Debug\mini.csprojResolveAssemblyReference.cache
 C:\Users\Kao-PC\Documents\Repository\Telerik Academy Homeworks\High Quality Code\Teamwork\Minesweeper-5\obj\Debug\Minesweeper.exe
 C:\Users\Kao-PC\Documents\Repository\Telerik Academy Homeworks\High Quality Code\Teamwork\Minesweeper-5\obj\Debug\Minesweeper.pdb
+D:\Work\GitHub\Minesweeper-5\obj\Debug\Minesweeper.exe
+D:\Work\GitHub\Minesweeper-5\obj\Debug\Minesweeper.pdb
