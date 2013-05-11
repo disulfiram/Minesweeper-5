@@ -31,6 +31,7 @@ namespace Minesweeper
         /// </summary>
         public enum FieldStatus
         {
+            //TODO
             Closed,
             Opened,
             IsAMine

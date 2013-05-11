@@ -1,0 +1,2 @@
+D:\Work\GitHub\Minesweeper-5\obj\Debug\Minesweeper.exe
+D:\Work\GitHub\Minesweeper-5\obj\Debug\Minesweeper.pdb
