@@ -5,3 +5,6 @@ C:\Users\Kao-PC\Documents\GitHub\Minesweeper-5\obj\Debug\Minesweeper.pdb
 C:\Users\Kao-PC\Documents\GitHub\Minesweeper-5\bin\Debug\Minesweeper.exe
 C:\Users\Kao-PC\Documents\GitHub\Minesweeper-5\bin\Debug\Minesweeper.pdb
 C:\Users\Kao-PC\Documents\GitHub\Minesweeper-5\obj\Debug\Minesweeper-5.csprojResolveAssemblyReference.cache
+D:\Work\GitHub\Minesweeper-5\bin\Debug\Minesweeper.exe
+D:\Work\GitHub\Minesweeper-5\bin\Debug\Minesweeper.pdb
+D:\Work\GitHub\Minesweeper-5\obj\Debug\Minesweeper-5.csprojResolveAssemblyReference.cache

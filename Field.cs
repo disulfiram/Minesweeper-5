@@ -1,8 +1,6 @@
 namespace Minesweeper
 {
     using System;
-    using System.Collections.Generic;
-    using System.Text;
 
     /// <summary>
     /// Represents a single square on the board.
@@ -35,9 +33,19 @@ namespace Minesweeper
             /// </summary>
             public enum FieldStatus
             {
-                // TO DO
+                /// <summary>
+                /// The field is closed.
+                /// </summary>
                 Closed,
+
+                /// <summary>
+                /// The field is opened.
+                /// </summary>
                 Opened,
+
+                /// <summary>
+                /// The field is a mine.
+                /// </summary>
                 IsAMine
             }
 
