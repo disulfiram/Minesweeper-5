@@ -30,9 +30,9 @@ namespace Minesweeper
             topPlayers.Capacity = MaxTopPlayers;
         }
 
-        private static bool CheckHighScores(int score)
+        private static bool IsQualifiedForScoreBoard(int score)
         {
-            if (topPlayers.Capacity > topPlayers.Count)
+            if (topPlayers.Count < topPlayers.Capacity)
             {
                 return true;
             }
@@ -68,7 +68,7 @@ namespace Minesweeper
             Console.WriteLine("Scoreboard");
             for (int i = 0; i < topPlayers.Count; i++)
             {
-                Console.WriteLine((int)(i + 1) + ". " + topPlayers[i]);
+                Console.WriteLine(i + 1 + ". " + topPlayers[i]);
             }
         }
 
@@ -76,7 +76,7 @@ namespace Minesweeper
         {
             InitializeTopPlayers();
             string str = "restart";
-            int choosenRow = 0;
+            int chosenRow = 0;
             int chosenColumn = 0;
 
             while (str != "exit")
@@ -103,16 +103,16 @@ namespace Minesweeper
                 {
                     try
                     {
-                        Board.Status status = board.OpenField(choosenRow, chosenColumn);
+                        Board.Status status = board.OpenField(chosenRow, chosenColumn);
                         if (status == Board.Status.SteppedOnAMine)
                         {
                             board.PrintAllFields();
-                            int score = board.CountOpenedFields();
+                            int score = board.OpenedFieldsCount;
                             Console.WriteLine("Booooom! You were killed by a mine. You revealed " +
                                               score +
                                               " cells without mines.");
 
-                            if (CheckHighScores(score))
+                            if (IsQualifiedForScoreBoard(score))
                             {
                                 Console.WriteLine("Please enter your name for the top scoreboard: ");
                                 string name = Console.ReadLine();
@@ -131,9 +131,9 @@ namespace Minesweeper
                         else if (status == Board.Status.AllFieldsAreOpened)
                         {
                             board.PrintAllFields();
-                            int score = board.CountOpenedFields();
+                            int score = board.OpenedFieldsCount;
                             Console.WriteLine("Congratulations! You win!!");
-                            if (CheckHighScores(score))
+                            if (IsQualifiedForScoreBoard(score))
                             {
                                 Console.WriteLine("Please enter your name for the top scoreboard: ");
                                 string name = Console.ReadLine();
@@ -152,33 +152,23 @@ namespace Minesweeper
                             board.PrintGameBoard();
                         }
                     }
-                    catch (Exception)
+                    catch (IndexOutOfRangeException)
                     {
                         Console.WriteLine("Illegal move");
                     }
                 }
 
                 Console.Write(System.Environment.NewLine + "Enter row and column: ");
-
-                str = Console.ReadLine();
                 try
                 {
-                    choosenRow = int.Parse(str);
-                    str = "coordinates";
-                }
-                catch
-                {
-                    // niama smisal tuka
-                    continue;
-                }
-
-                str = Console.ReadLine();
-                try
-                {
+                    str = Console.ReadLine();
+                    chosenRow = int.Parse(str);
+                    str = Console.ReadLine();
                     chosenColumn = int.Parse(str);
+
                     str = "coordinates";
                 }
-                catch (Exception)
+                catch (FormatException)
                 {
                     continue;
                 }
