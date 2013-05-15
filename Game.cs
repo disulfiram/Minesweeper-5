@@ -48,7 +48,7 @@ namespace Minesweeper
             return false;
         }
 
-        private static void TopAdd(ref Player player)
+        private static void AddPlayerToScoreBoard(Player player)
         {
             if (topPlayers.Capacity > topPlayers.Count)
             {
@@ -70,6 +70,8 @@ namespace Minesweeper
             {
                 Console.WriteLine(i + 1 + ". " + topPlayers[i]);
             }
+
+            Console.ReadKey();
         }
 
         private static void Menu()
@@ -81,14 +83,9 @@ namespace Minesweeper
             int chosenRow, chosenColumn;
             do
             {
-                Console.Clear();
-                Console.WriteLine("Welcome to the game “Minesweeper”. " +
-                                          "Try to reveal all cells without mines. " +
-                                          "Use 'top' to view the scoreboard, 'restart' to start a new game " +
-                                          "and 'exit' to quit the game.");
+                PrintHeader();
                 board.PrintGameBoard();
-                Console.Write(System.Environment.NewLine + "Enter row and column: ");
-                
+                Console.Write(System.Environment.NewLine + "Enter row: ");
                 input = Console.ReadLine();
                 bool rowParseSuccess = int.TryParse(input, out chosenRow);
                 if (!rowParseSuccess)
@@ -97,6 +94,7 @@ namespace Minesweeper
                     continue;
                 }
 
+                Console.Write(System.Environment.NewLine + "Enter column: ");
                 input = Console.ReadLine();
                 bool colParseSuccess = int.TryParse(input, out chosenColumn);
                 if (!colParseSuccess)
@@ -108,6 +106,17 @@ namespace Minesweeper
                 PlayMove(chosenRow, chosenColumn);
             }
             while (input != "exit");
+            Console.WriteLine("Good bye!");
+            Console.Read();
+        }
+
+        private static void PrintHeader()
+        {
+            Console.Clear();
+            Console.WriteLine("Welcome to the game “Minesweeper”. " +
+                                      "Try to reveal all cells without mines. " +
+                                      "Use 'top' to view the scoreboard, 'restart' to start a new game " +
+                                      "and 'exit' to quit the game.");
         }
 
         private static void ProcessCommands(string input)
@@ -115,11 +124,6 @@ namespace Minesweeper
             if (input == "restart")
             {
                 InitializeGameBoard();
-            }
-            else if (input == "exit")
-            {
-                Console.WriteLine("Good bye!");
-                Console.Read();
             }
             else if (input == "top")
             {
@@ -137,14 +141,15 @@ namespace Minesweeper
                 return;
             }
 
-            Board.Status status = board.OpenField(row, col);
+            Board.Status status = board.OpenCell(row, col);
             if (status == Board.Status.SteppedOnAMine || status == Board.Status.AllFieldsAreOpened)
             {
-                board.PrintAllFields();
-                int score = board.OpenedFieldsCount;
+                PrintHeader();
+                board.PrintGameBoardRevealed();
+                int score = board.OpenedCellsCount;
                 if (status == Board.Status.SteppedOnAMine)
                 {
-                    Console.WriteLine("Booooom! You were killed by a mine. You revealed " +
+                    Console.WriteLine(Environment.NewLine + "Booooom! You were killed by a mine. You revealed " +
                                         score +
                                         " cells without mines.");
                 }
@@ -163,6 +168,7 @@ namespace Minesweeper
             else if (status == Board.Status.AlreadyOpened)
             {
                 Console.WriteLine("Illegal move!");
+                Console.ReadKey();
             }
         }
 
@@ -171,7 +177,7 @@ namespace Minesweeper
             Console.WriteLine("Please enter your name for the top scoreboard: ");
             string name = Console.ReadLine();
             Player player = new Player(name, score);
-            TopAdd(ref player);
+            AddPlayerToScoreBoard(player);
             ListTopPlayers();
         }
     }

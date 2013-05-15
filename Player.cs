@@ -31,6 +31,7 @@
         /// <summary>
         /// Gets or sets the name of the player.
         /// </summary>
+        /// <value>The name of the player.</value>
         public string Name
         {
             get
@@ -50,8 +51,9 @@
         }
 
         /// <summary>
-        /// Gets or sets the name of the player.
+        /// Gets or sets the score of the player.
         /// </summary>
+        /// <value>The score to be set.</value>
         public int Score
         {
             get
@@ -69,7 +71,8 @@
         /// Compares two instances of the Player class by their scores.
         /// </summary>
         /// <param name="obj">The other Player.</param>
-        /// <returns>1 if the this player has higher score than the second one. -1 if this player has lower score than the second one</returns>
+        /// <returns>1 if the this player has higher score than the second one. 
+        /// -1 if this player has lower score than the second one.</returns>
         public int CompareTo(object obj)
         {
             if (!(obj is Player))

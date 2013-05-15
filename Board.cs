@@ -34,19 +34,54 @@ namespace Minesweeper
         }
 
         /// <summary>
-        /// Indicates the current state of the cell
+        /// Indicates the current state of the cell.
         /// </summary>
         public enum Status
         {
             SteppedOnAMine, AlreadyOpened, SuccessfullyOpened, AllFieldsAreOpened
         }
 
-        public int OpenedFieldsCount
+        /// <summary>
+        /// Gets the number of opened cells.
+        /// </summary>
+        /// <value>The number of cells.</value>
+        public int OpenedCellsCount
         {
             get
             {
                 return this.openedFields;
             }
+        }
+
+        public Status OpenCell(int row, int column)
+        {
+            FieldCell cell = this.field[row][column];
+            Status status;
+
+            if (cell.Status == FieldCell.CellStatus.IsAMine)
+            {
+                status = Status.SteppedOnAMine;
+            }
+            else if (cell.Status == FieldCell.CellStatus.Opened)
+            {
+                status = Status.AlreadyOpened;
+            }
+            else
+            {
+                cell.Value = this.ScanSurroundingCells(row, column);
+                cell.Status = FieldCell.CellStatus.Opened;
+                this.openedFields++;
+                if (this.AllCellsAreOpened())
+                {
+                    status = Status.AllFieldsAreOpened;
+                }
+                else
+                {
+                    status = Status.SuccessfullyOpened;
+                }
+            }
+
+            return status;
         }
 
         public void PrintGameBoard()
@@ -95,38 +130,7 @@ namespace Minesweeper
             Console.WriteLine();
         }
 
-        public Status OpenField(int row, int column)
-        {
-            FieldCell cell = this.field[row][column];
-            Status status;
-
-            if (cell.Status == FieldCell.CellStatus.IsAMine)
-            {
-                status = Status.SteppedOnAMine;
-            }
-            else if (cell.Status == FieldCell.CellStatus.Opened)
-            {
-                status = Status.AlreadyOpened;
-            }
-            else
-            {
-                cell.Value = this.ScanSurroundingFields(row, column);
-                cell.Status = FieldCell.CellStatus.Opened;
-                this.openedFields++;
-                if (this.CheckIfWin())
-                {
-                    status = Status.AllFieldsAreOpened;
-                }
-                else
-                {
-                    status = Status.SuccessfullyOpened;
-                }
-            }
-
-            return status;
-        }
-
-        public void PrintAllFields()
+        public void PrintGameBoardRevealed()
         {
             Console.Write("    ");
             for (int i = 0; i < this.columns; i++)
@@ -160,7 +164,7 @@ namespace Minesweeper
                     }
                     else
                     {
-                        currentCell.Value = this.ScanSurroundingFields(i, j);
+                        currentCell.Value = this.ScanSurroundingCells(i, j);
                         Console.Write(this.field[i][j].Value + " ");
                     }
                 }
@@ -177,62 +181,62 @@ namespace Minesweeper
             Console.WriteLine();
         }
 
-        private int ScanSurroundingFields(int row, int column)
+        private int ScanSurroundingCells(int row, int column)
         {
-            int mines = 0;
+            int minesCount = 0;
             if ((row > 0) &&
                 (column > 0) &&
                 (this.field[row - 1][column - 1].Status == FieldCell.CellStatus.IsAMine))
             {
-                mines++;
+                minesCount++;
             }
 
             if ((row > 0) &&
                 (this.field[row - 1][column].Status == FieldCell.CellStatus.IsAMine))
             {
-                mines++;
+                minesCount++;
             }
 
             if ((row > 0) &&
                 (column < this.columns - 1) &&
                 (this.field[row - 1][column + 1].Status == FieldCell.CellStatus.IsAMine))
             {
-                mines++;
+                minesCount++;
             }
 
             if ((column > 0) &&
                 (this.field[row][column - 1].Status == FieldCell.CellStatus.IsAMine))
             {
-                mines++;
+                minesCount++;
             }
 
             if ((column < this.columns - 1) &&
                 (this.field[row][column + 1].Status == FieldCell.CellStatus.IsAMine))
             {
-                mines++;
+                minesCount++;
             }
 
             if ((row < this.rows - 1) &&
                 (column > 0) &&
                 (this.field[row + 1][column - 1].Status == FieldCell.CellStatus.IsAMine))
             {
-                mines++;
+                minesCount++;
             }
 
             if ((row < this.rows - 1) &&
                 (this.field[row + 1][column].Status == FieldCell.CellStatus.IsAMine))
             {
-                mines++;
+                minesCount++;
             }
 
             if ((row < this.rows - 1) &&
                 (column < this.columns - 1) &&
                 (this.field[row + 1][column + 1].Status == FieldCell.CellStatus.IsAMine))
             {
-                mines++;
+                minesCount++;
             }
 
-            return mines;
+            return minesCount;
         }
 
         private void SetMines()
@@ -254,7 +258,7 @@ namespace Minesweeper
             }
         }
 
-        private bool CheckIfWin()
+        private bool AllCellsAreOpened()
         {
             if ((this.openedFields + this.minesCount) == (this.rows * this.columns))
             {

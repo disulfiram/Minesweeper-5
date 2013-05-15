@@ -13,7 +13,7 @@ namespace Minesweeper
         private int value;
 
         /// <summary>
-        /// Status of the field
+        /// Status of the field.
         /// </summary>
         private CellStatus status;
 
@@ -47,6 +47,7 @@ namespace Minesweeper
         /// <summary>
         /// Gets or sets the number of adjacent mines.
         /// </summary>
+        /// <value>The number of adjacent mines.</value>
         public int Value
         {
             get
@@ -63,6 +64,7 @@ namespace Minesweeper
         /// <summary>
         /// Gets or sets status of the field.
         /// </summary>
+        /// <value>The status of the cell.</value>
         public CellStatus Status
         {
             get
