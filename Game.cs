@@ -63,7 +63,7 @@ namespace Minesweeper
             }
         }
 
-        private static void Top()
+        private static void ListTopPlayers()
         {
             Console.WriteLine("Scoreboard");
             for (int i = 0; i < topPlayers.Count; i++)
@@ -75,104 +75,104 @@ namespace Minesweeper
         private static void Menu()
         {
             InitializeTopPlayers();
-            string str = "restart";
-            int chosenRow = 0;
-            int chosenColumn = 0;
+            InitializeGameBoard();
 
-            while (str != "exit")
+            string input = string.Empty;
+            int chosenRow, chosenColumn;
+            do
             {
-                if (str == "restart")
-                {
-                    InitializeGameBoard();
-                    Console.WriteLine("Welcome to the game “Minesweeper”. " +
-                                      "Try to reveal all cells without mines. " +
-                                      "Use 'top' to view the scoreboard, 'restart' to start a new game" +
-                                      "and 'exit' to quit the game.");
-                    board.PrintGameBoard();
-                }
-                else if (str == "exit")
-                {
-                    Console.WriteLine("Good bye!");
-                    Console.Read();
-                }
-                else if (str == "top")
-                {
-                    Top();
-                }
-                else if (str == "coordinates")
-                {
-                    try
-                    {
-                        Board.Status status = board.OpenField(chosenRow, chosenColumn);
-                        if (status == Board.Status.SteppedOnAMine)
-                        {
-                            board.PrintAllFields();
-                            int score = board.OpenedFieldsCount;
-                            Console.WriteLine("Booooom! You were killed by a mine. You revealed " +
-                                              score +
-                                              " cells without mines.");
-
-                            if (IsQualifiedForScoreBoard(score))
-                            {
-                                Console.WriteLine("Please enter your name for the top scoreboard: ");
-                                string name = Console.ReadLine();
-                                Player player = new Player(name, score);
-                                TopAdd(ref player);
-                                Top();
-                            }
-
-                            str = "restart";
-                            continue;
-                        }
-                        else if (status == Board.Status.AlreadyOpened)
-                        {
-                            Console.WriteLine("Illegal move!");
-                        }
-                        else if (status == Board.Status.AllFieldsAreOpened)
-                        {
-                            board.PrintAllFields();
-                            int score = board.OpenedFieldsCount;
-                            Console.WriteLine("Congratulations! You win!!");
-                            if (IsQualifiedForScoreBoard(score))
-                            {
-                                Console.WriteLine("Please enter your name for the top scoreboard: ");
-                                string name = Console.ReadLine();
-                                Player player = new Player(name, score);
-                                TopAdd(ref player);
-                                Top();
-                                TopAdd(ref player);
-                                Top();
-                            }
-
-                            str = "restart";
-                            continue;
-                        }
-                        else
-                        {
-                            board.PrintGameBoard();
-                        }
-                    }
-                    catch (IndexOutOfRangeException)
-                    {
-                        Console.WriteLine("Illegal move");
-                    }
-                }
-
+                Console.Clear();
+                Console.WriteLine("Welcome to the game “Minesweeper”. " +
+                                          "Try to reveal all cells without mines. " +
+                                          "Use 'top' to view the scoreboard, 'restart' to start a new game " +
+                                          "and 'exit' to quit the game.");
+                board.PrintGameBoard();
                 Console.Write(System.Environment.NewLine + "Enter row and column: ");
-                try
+                
+                input = Console.ReadLine();
+                bool rowParseSuccess = int.TryParse(input, out chosenRow);
+                if (!rowParseSuccess)
                 {
-                    str = Console.ReadLine();
-                    chosenRow = int.Parse(str);
-                    str = Console.ReadLine();
-                    chosenColumn = int.Parse(str);
-
-                    str = "coordinates";
-                }
-                catch (FormatException)
-                {
+                    ProcessCommands(input);
                     continue;
                 }
+
+                input = Console.ReadLine();
+                bool colParseSuccess = int.TryParse(input, out chosenColumn);
+                if (!colParseSuccess)
+                {
+                    ProcessCommands(input);
+                    continue;
+                }
+
+                PlayMove(chosenRow, chosenColumn);
             }
+            while (input != "exit");
+        }
+
+        private static void ProcessCommands(string input)
+        {
+            if (input == "restart")
+            {
+                InitializeGameBoard();
+            }
+            else if (input == "exit")
+            {
+                Console.WriteLine("Good bye!");
+                Console.Read();
+            }
+            else if (input == "top")
+            {
+                ListTopPlayers();
+            }
+        }
+
+        private static void PlayMove(int row, int col)
+        {
+            if (row < 0 || row >= MaxRows
+                || col < 0 || col >= MaxColumns)
+            {
+                Console.WriteLine("Illegal move.");
+                Console.ReadKey();
+                return;
+            }
+
+            Board.Status status = board.OpenField(row, col);
+            if (status == Board.Status.SteppedOnAMine || status == Board.Status.AllFieldsAreOpened)
+            {
+                board.PrintAllFields();
+                int score = board.OpenedFieldsCount;
+                if (status == Board.Status.SteppedOnAMine)
+                {
+                    Console.WriteLine("Booooom! You were killed by a mine. You revealed " +
+                                        score +
+                                        " cells without mines.");
+                }
+                else
+                {
+                    Console.WriteLine("Congratulations! You win!!");
+                }
+
+                if (IsQualifiedForScoreBoard(score))
+                {
+                    SaveHighScore(score);
+                }
+
+                InitializeGameBoard();
+            }
+            else if (status == Board.Status.AlreadyOpened)
+            {
+                Console.WriteLine("Illegal move!");
+            }
+        }
+
+        private static void SaveHighScore(int score)
+        {
+            Console.WriteLine("Please enter your name for the top scoreboard: ");
+            string name = Console.ReadLine();
+            Player player = new Player(name, score);
+            TopAdd(ref player);
+            ListTopPlayers();
         }
     }
 }

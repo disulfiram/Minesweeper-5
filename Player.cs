@@ -44,6 +44,7 @@
                 {
                     throw new ArgumentNullException("The name of the player cannot be null.");
                 }
+
                 this.name = value;
             }
         }
@@ -57,6 +58,7 @@
             {
                 return this.score;
             }
+
             set
             {
                 this.score = value;
