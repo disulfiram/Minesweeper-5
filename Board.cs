@@ -11,6 +11,12 @@ namespace Minesweeper
         private Random random;
         private int openedFields;
 
+        /// <summary>
+        /// Initializes an insance of the Board class.
+        /// </summary>
+        /// <param name="rows">Number of rows in the board.</param>
+        /// <param name="columns">Number of columns in the board.</param>
+        /// <param name="minesCount">Number of mines in the board.</param>
         public Board(int rows, int columns, int minesCount)
         {
             this.random = new Random();
