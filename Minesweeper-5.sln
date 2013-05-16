@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Minesweeper-5", "Minesweeper-5.csproj", "{2B23ACDB-7CF2-4EAC-BB80-B6DD3B90BCA4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MinesweeperTests", "MinesweeperTests\MinesweeperTests.csproj", "{5EAF5CD5-459B-4FC1-88A2-A0231B6A21ED}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +15,10 @@ Global
 		{2B23ACDB-7CF2-4EAC-BB80-B6DD3B90BCA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2B23ACDB-7CF2-4EAC-BB80-B6DD3B90BCA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2B23ACDB-7CF2-4EAC-BB80-B6DD3B90BCA4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5EAF5CD5-459B-4FC1-88A2-A0231B6A21ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5EAF5CD5-459B-4FC1-88A2-A0231B6A21ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5EAF5CD5-459B-4FC1-88A2-A0231B6A21ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5EAF5CD5-459B-4FC1-88A2-A0231B6A21ED}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
