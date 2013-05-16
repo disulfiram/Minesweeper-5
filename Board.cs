@@ -1,8 +1,6 @@
 namespace Minesweeper
 {
     using System;
-    using System.Collections.Generic;
-    using System.Text;
 
     public class Board
     {
@@ -34,11 +32,29 @@ namespace Minesweeper
         }
 
         /// <summary>
-        /// Indicates the current state of the cell.
+        /// Indicates outcome of turn.
         /// </summary>
         public enum Status
         {
-            SteppedOnAMine, AlreadyOpened, SuccessfullyOpened, AllFieldsAreOpened
+            /// <summary>
+            /// Mine being stepped on.
+            /// </summary>
+            SteppedOnAMine,
+
+            /// <summary>
+            /// Field cell that is opened.
+            /// </summary>
+            AlreadyOpened,
+
+            /// <summary>
+            /// Empty field cell.
+            /// </summary>
+            SuccessfullyOpened,
+
+            /// <summary>
+            /// All fields are opened. Win state.
+            /// </summary>
+            AllFieldsAreOpened
         }
 
         /// <summary>
@@ -53,6 +69,12 @@ namespace Minesweeper
             }
         }
 
+        /// <summary>
+        /// Performs an open cell action.
+        /// </summary>
+        /// <param name="row">Row of cell to be opened.</param>
+        /// <param name="column">Columnt of cell to be opened.</param>
+        /// <returns>Game status after turn.</returns>
         public Status OpenCell(int row, int column)
         {
             FieldCell cell = this.field[row][column];
@@ -84,6 +106,9 @@ namespace Minesweeper
             return status;
         }
 
+        /// <summary>
+        /// Prints the gameboard
+        /// </summary>
         public void PrintGameBoard()
         {
             Console.Write("    ");
@@ -130,6 +155,9 @@ namespace Minesweeper
             Console.WriteLine();
         }
 
+        /// <summary>
+        /// Prints the final state of the board in the end of the game.
+        /// </summary>
         public void PrintGameBoardRevealed()
         {
             Console.Write("    ");
@@ -181,6 +209,12 @@ namespace Minesweeper
             Console.WriteLine();
         }
 
+        /// <summary>
+        /// Scans cell adjacent to given cell.
+        /// </summary>
+        /// <param name="row">Row of the cell.</param>
+        /// <param name="column">Column of the cell.</param>
+        /// <returns>The number of mines adjacent to the given cell.</returns>
         private int ScanSurroundingCells(int row, int column)
         {
             int minesCount = 0;
@@ -239,6 +273,9 @@ namespace Minesweeper
             return minesCount;
         }
 
+        /// <summary>
+        /// Places mines in the field.
+        /// </summary>
         private void SetMines()
         {
             for (int i = 0; i < this.minesCount; i++)
@@ -258,6 +295,10 @@ namespace Minesweeper
             }
         }
 
+        /// <summary>
+        /// Checks if all fields are opened.
+        /// </summary>
+        /// <returns>Boolean expresion.</returns>
         private bool AllCellsAreOpened()
         {
             if ((this.openedFields + this.minesCount) == (this.rows * this.columns))
