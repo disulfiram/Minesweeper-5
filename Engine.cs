@@ -179,7 +179,8 @@ namespace Minesweeper
             string name = Console.ReadLine();
             Player player = new Player(name, score);
             highScore.AddPlayerToScoreBoard(player);
-            highScore.ListTopPlayers();
+            Console.WriteLine(highScore.ListTopPlayers());
+            Console.ReadKey();
         }
     }
 }
