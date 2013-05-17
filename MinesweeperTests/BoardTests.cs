@@ -1,6 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Minesweeper;
+using System.IO;
 
 namespace MinesweeperTests
 {
@@ -17,7 +18,7 @@ namespace MinesweeperTests
         }
 
         [TestMethod]
-        public void TestBoardNoMines()
+        public void TestBoardOpenCellNoMines()
         {
             int rows = 15, cols = 15, minesCount = 0;
             int fieldsCount = rows * cols;
@@ -95,6 +96,30 @@ namespace MinesweeperTests
             Board board = new Board(rows, cols, minesCount);
             Assert.AreEqual(3, board.ScanSurroundingCells(0, 0));
             Assert.AreEqual(8, board.ScanSurroundingCells(5, 5));
+        }
+
+        [TestMethod]
+        public void TestRepresentationOfEmptyBoard()
+        {
+            int rows = 3, cols = 3;
+            int fieldsCount = rows * cols, minesCount = 0;
+
+            Board board = new Board(rows, cols, minesCount);
+            string expected = File.ReadAllText("board3x3.txt"); ;
+            string representation = board.GetGameBoardRepresentation();
+            Assert.AreEqual(expected, representation);
+        }
+
+        [TestMethod]
+        public void TestRevealedRepresentationOfEmptyBoard()
+        {
+            int rows = 3, cols = 3;
+            int fieldsCount = rows * cols, minesCount = 0;
+
+            Board board = new Board(rows, cols, minesCount);
+            string expected = File.ReadAllText("board3x3revealed.txt"); ;
+            string representation = board.GetGameBoardRepresentationRevealed();
+            Assert.AreEqual(expected, representation);
         }
 
 

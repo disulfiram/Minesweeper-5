@@ -68,7 +68,7 @@ namespace Minesweeper
             do
             {
                 PrintHeader();
-                board.PrintGameBoard();
+                Console.WriteLine(board.GetGameBoardRepresentation());
                 Console.Write(System.Environment.NewLine + "Enter row: ");
                 input = Console.ReadLine();
                 bool rowParseSuccess = int.TryParse(input, out chosenRow);
@@ -141,7 +141,7 @@ namespace Minesweeper
             if (status == Board.Status.SteppedOnAMine || status == Board.Status.AllFieldsAreOpened)
             {
                 PrintHeader();
-                board.PrintGameBoardRevealed();
+                Console.WriteLine(board.GetGameBoardRepresentationRevealed());
                 int score = board.OpenedCellsCount;
                 if (status == Board.Status.SteppedOnAMine)
                 {

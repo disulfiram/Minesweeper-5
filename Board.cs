@@ -1,6 +1,7 @@
 namespace Minesweeper
 {
     using System;
+    using System.Text;
 
     public class Board
     {
@@ -115,104 +116,108 @@ namespace Minesweeper
         /// <summary>
         /// Prints the gameboard
         /// </summary>
-        public void PrintGameBoard()
+        public string GetGameBoardRepresentation()
         {
-            Console.Write("    ");
+            StringBuilder sb = new StringBuilder();
+            sb.Append("    ");
             for (int currentColumn = 0; currentColumn < this.columns; currentColumn++)
             {
-                Console.Write(currentColumn + " ");
+                sb.Append(currentColumn + " ");
             }
 
-            Console.WriteLine();
-            Console.Write("   _");
+            sb.AppendLine();
+            sb.Append("   _");
             for (int i = 0; i < this.columns; i++)
             {
-                Console.Write("__");
+                sb.Append("__");
             }
 
-            Console.WriteLine();
+            sb.AppendLine();
             for (int currentRow = 0; currentRow < this.rows; currentRow++)
             {
-                Console.Write(currentRow);
-                Console.Write(" | ");
+                sb.Append(currentRow);
+                sb.Append(" | ");
                 for (int currentColumn = 0; currentColumn < this.columns; currentColumn++)
                 {
                     FieldCell currentCell = this.field[currentRow][currentColumn];
                     if (currentCell.Status == FieldCell.CellStatus.Opened)
                     {
-                        Console.Write(this.field[currentRow][currentColumn].Value);
-                        Console.Write(" ");
+                        sb.Append(this.field[currentRow][currentColumn].Value);
+                        sb.Append(" ");
                     }
                     else
                     {
-                        Console.Write("? ");
+                        sb.Append("? ");
                     }
                 }
 
-                Console.WriteLine("|");
+                sb.AppendLine("|");
             }
 
-            Console.Write("   _");
+            sb.Append("   _");
             for (int currentColumn = 0; currentColumn < this.columns; currentColumn++)
             {
-                Console.Write("__");
+                sb.Append("__");
             }
 
-            Console.WriteLine();
+            sb.AppendLine();
+            return sb.ToString();
         }
 
         /// <summary>
         /// Prints the final state of the board in the end of the game.
         /// </summary>
-        public void PrintGameBoardRevealed()
+        public string GetGameBoardRepresentationRevealed()
         {
-            Console.Write("    ");
+            StringBuilder sb = new StringBuilder();
+            sb.Append("    ");
             for (int i = 0; i < this.columns; i++)
             {
-                Console.Write(i + " ");
+                sb.Append(i + " ");
             }
 
-            Console.WriteLine();
-            Console.Write("   _");
+            sb.AppendLine();
+            sb.Append("   _");
 
             for (int i = 0; i < this.columns; i++)
             {
-                Console.Write("__");
+                sb.Append("__");
             }
 
-            Console.WriteLine();
+            sb.AppendLine();
             for (int i = 0; i < this.rows; i++)
             {
-                Console.Write(i);
-                Console.Write(" | ");
+                sb.Append(i);
+                sb.Append(" | ");
                 for (int j = 0; j < this.columns; j++)
                 {
                     FieldCell currentCell = this.field[i][j];
                     if (currentCell.Status == FieldCell.CellStatus.Opened)
                     {
-                        Console.Write(this.field[i][j].Value + " ");
+                        sb.Append(this.field[i][j].Value + " ");
                     }
                     else if (currentCell.Status == FieldCell.CellStatus.IsAMine)
                     {
-                        Console.Write("* ");
+                        sb.Append("* ");
                     }
                     else
                     {
                         currentCell.Value = this.ScanSurroundingCells(i, j);
-                        Console.Write(this.field[i][j].Value + " ");
+                        sb.Append(this.field[i][j].Value + " ");
                     }
                 }
 
-                Console.WriteLine("|");
+                sb.AppendLine("|");
             }
 
-            Console.Write("   _");
+            sb.Append("   _");
             for (int i = 0; i < this.columns; i++)
             {
-                Console.Write("__");
+                sb.Append("__");
             }
 
-            Console.WriteLine();
+            sb.AppendLine();
+            return sb.ToString();
         }
 
         /// <summary>
