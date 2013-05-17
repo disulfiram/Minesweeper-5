@@ -58,8 +58,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Board.cs" />
-    <Compile Include="Game.cs" />
+    <Compile Include="Engine.cs" />
     <Compile Include="FieldCell.cs" />
+    <Compile Include="GameMain.cs" />
     <Compile Include="HighScore.cs" />
     <Compile Include="Player.cs" />
   </ItemGroup>

@@ -2,6 +2,7 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Text;
     
     public class HighScore
     {
@@ -21,6 +22,14 @@
         public HighScore()
         {
             this.topPlayers = new List<Player>(MaxPlayers);
+        }
+
+        public List<Player> TopPlayers
+        {
+            get
+            {
+                return this.topPlayers;
+            }
         }
 
         /// <summary>
@@ -68,15 +77,17 @@
         /// <summary>
         /// Prints highscores on the console.
         /// </summary>
-        internal void ListTopPlayers()
+        public string ListTopPlayers()
         {
-            Console.WriteLine("Scoreboard");
+            StringBuilder sb = new StringBuilder();
+
+            sb.AppendLine("Scoreboard");
             for (int i = 0; i < topPlayers.Count; i++)
             {
-                Console.WriteLine(i + 1 + ". " + topPlayers[i]);
+                sb.AppendLine(i + 1 + ". " + topPlayers[i]);
             }
 
-            Console.ReadKey();
+            return sb.ToString();
         }
     }
 }

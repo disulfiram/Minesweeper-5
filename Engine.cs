@@ -2,7 +2,7 @@ namespace Minesweeper
 {
     using System;
 
-    public class Game
+    public class Engine
     {
         /// <summary>
         /// Board number of rows.
@@ -34,10 +34,7 @@ namespace Minesweeper
         /// </summary>
         private static Board board;
 
-        public static void Main(string[] args)
-        {
-            Menu();
-        }
+        
 
         /// <summary>
         /// Initializes a game board.
@@ -58,7 +55,7 @@ namespace Minesweeper
         /// <summary>
         /// Main method for the game.
         /// </summary>
-        private static void Menu()
+        public static void Menu()
         {
             InitializeTopPlayers();
             InitializeGameBoard();
@@ -119,7 +116,8 @@ namespace Minesweeper
             }
             else if (input == "top")
             {
-                highScore.ListTopPlayers();
+                Console.WriteLine(highScore.ListTopPlayers());
+                Console.ReadKey();
             }
         }
 
@@ -130,18 +128,8 @@ namespace Minesweeper
         /// <param name="col">Player chosen column.</param>
         public static Board.Status PlayMove(int row, int col)
         {
-            Board.Status status;
-
-            if (row < 0 || row >= MaxRows
-                || col < 0 || col >= MaxColumns)
-            {
-                status = Board.Status.OutOfRange;
-                return status;
-            }
-
-            status = board.OpenCell(row, col);
+            Board.Status status = board.OpenCell(row, col);
             return status;
-
         }
 
         /// <summary>

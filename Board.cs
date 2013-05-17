@@ -89,9 +89,15 @@ namespace Minesweeper
         /// <returns>Game status after turn.</returns>
         public Status OpenCell(int row, int column)
         {
-            FieldCell cell = this.field[row][column];
             Status status;
+            if (row < 0 || row >= this.rows
+                || column < 0 || column >= this.columns)
+            {
+                status = Board.Status.OutOfRange;
+                return status;
+            }
 
+            FieldCell cell = this.field[row][column];
             if (cell.Status == FieldCell.CellStatus.IsAMine)
             {
                 status = Status.SteppedOnAMine;
