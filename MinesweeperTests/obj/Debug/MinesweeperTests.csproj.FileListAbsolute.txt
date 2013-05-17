@@ -1,0 +1,7 @@
+D:\Work\GitHub\Minesweeper-5\MinesweeperTests\bin\Debug\MinesweeperTests.dll
+D:\Work\GitHub\Minesweeper-5\MinesweeperTests\bin\Debug\MinesweeperTests.pdb
+D:\Work\GitHub\Minesweeper-5\MinesweeperTests\bin\Debug\Minesweeper.exe
+D:\Work\GitHub\Minesweeper-5\MinesweeperTests\bin\Debug\Minesweeper.pdb
+D:\Work\GitHub\Minesweeper-5\MinesweeperTests\obj\Debug\MinesweeperTests.csprojResolveAssemblyReference.cache
+D:\Work\GitHub\Minesweeper-5\MinesweeperTests\obj\Debug\MinesweeperTests.dll
+D:\Work\GitHub\Minesweeper-5\MinesweeperTests\obj\Debug\MinesweeperTests.pdb
