@@ -63,6 +63,10 @@
 
             set
             {
+                if (value < 0)
+                {
+                    throw new ArgumentOutOfRangeException("Player cannot have negative score");
+                }
                 this.score = value;
             }
         }
