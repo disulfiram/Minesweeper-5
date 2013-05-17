@@ -69,5 +69,18 @@ namespace MinesweeperTests
 
             Assert.AreEqual(5, testHighScore.TopPlayers.Count);
         }
+
+        [TestMethod]
+        public void TestAddingTopScorerAfterScoreBoardIsFull()
+        {
+            HighScore testHighScore = new HighScore();
+            int playersCount = 15;
+            for (int i = 0; i < playersCount; i++)
+            {
+                testHighScore.AddPlayerToScoreBoard(new Player("Test Player", 5));
+            }
+            testHighScore.AddPlayerToScoreBoard(new Player("Best", 10));
+            Assert.AreEqual(10, testHighScore.TopPlayers[0].Score);
+        }
     }
 }
