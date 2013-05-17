@@ -221,7 +221,7 @@ namespace Minesweeper
         /// <param name="row">Row of the cell.</param>
         /// <param name="column">Column of the cell.</param>
         /// <returns>The number of mines adjacent to the given cell.</returns>
-        private int ScanSurroundingCells(int row, int column)
+        public int ScanSurroundingCells(int row, int column)
         {
             int minesCount = 0;
             if ((row > 0) &&
@@ -305,7 +305,7 @@ namespace Minesweeper
         /// Checks if all fields are opened.
         /// </summary>
         /// <returns>Boolean expresion.</returns>
-        private bool AllCellsAreOpened()
+        public bool AllCellsAreOpened()
         {
             if ((this.openedFields + this.minesCount) == (this.rows * this.columns))
             {
