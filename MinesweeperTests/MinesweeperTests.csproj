@@ -55,6 +55,7 @@
     <Compile Include="FieldCellTests.cs" />
     <Compile Include="PlayerTests.cs" />
     <Compile Include="GameTests.cs" />
+    <Compile Include="HighScoreTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Minesweeper-5.csproj">

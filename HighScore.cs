@@ -3,7 +3,7 @@
     using System;
     using System.Collections.Generic;
     
-    class HighScore
+    public class HighScore
     {
         /// <summary>
         /// The number of highscores the list contains
@@ -28,7 +28,7 @@
         /// </summary>
         /// <param name="score">Score of player.</param>
         /// <returns>True if player has high enough score. False if player does not have high enough score.</returns>
-        internal bool IsQualifiedForScoreBoard(int score)
+        public bool IsQualifiedForScoreBoard(int score)
         {
             if (topPlayers.Count < topPlayers.Capacity)
             {
@@ -50,7 +50,7 @@
         /// Adds player to the scoreboard.
         /// </summary>
         /// <param name="player">Player that is being added to scoreboard.</param>
-        internal void AddPlayerToScoreBoard(Player player)
+        public void AddPlayerToScoreBoard(Player player)
         {
             if (topPlayers.Capacity > topPlayers.Count)
             {
