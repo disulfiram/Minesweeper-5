@@ -1,14 +1,14 @@
 namespace Minesweeper
 {
     using System;
-    
+
     public class Game
     {
         /// <summary>
         /// Board number of rows.
         /// </summary>
         private const int MaxRows = 5;
-        
+
         /// <summary>
         /// Board number of columns.
         /// </summary>
@@ -87,7 +87,8 @@ namespace Minesweeper
                     continue;
                 }
 
-                PlayMove(chosenRow, chosenColumn);
+                Board.Status status = PlayMove(chosenRow, chosenColumn);
+                PrintMessage(status);
             }
             while (input != "exit");
             Console.WriteLine("Good bye!");
@@ -127,17 +128,29 @@ namespace Minesweeper
         /// </summary>
         /// <param name="row">Player chosen row.</param>
         /// <param name="col">Player chosen column.</param>
-        private static void PlayMove(int row, int col)
+        public static Board.Status PlayMove(int row, int col)
         {
-            if (row < 0 || row >= MaxRows ||
-                col < 0 || col >= MaxColumns)
+            Board.Status status;
+
+            if (row < 0 || row >= MaxRows
+                || col < 0 || col >= MaxColumns)
             {
-                Console.WriteLine("Illegal move.");
-                Console.ReadKey();
-                return;
+                status = Board.Status.OutOfRange;
+                return status;
             }
 
-            Board.Status status = board.OpenCell(row, col);
+            status = board.OpenCell(row, col);
+            return status;
+
+        }
+
+        /// <summary>
+        /// Prints messages corresponding to the
+        /// status set by moving the player
+        /// </summary>
+        /// <param name="status"></param>
+        private static void PrintMessage(Board.Status status)
+        {
             if (status == Board.Status.SteppedOnAMine || status == Board.Status.AllFieldsAreOpened)
             {
                 PrintHeader();
@@ -161,7 +174,7 @@ namespace Minesweeper
 
                 InitializeGameBoard();
             }
-            else if (status == Board.Status.AlreadyOpened)
+            else if (status == Board.Status.AlreadyOpened || status == Board.Status.OutOfRange)
             {
                 Console.WriteLine("Illegal move!");
                 Console.ReadKey();

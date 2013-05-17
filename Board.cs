@@ -61,7 +61,12 @@ namespace Minesweeper
             /// <summary>
             /// All fields are opened. Win state.
             /// </summary>
-            AllFieldsAreOpened
+            AllFieldsAreOpened,
+
+            /// <summary>
+            /// Move coordinates are out of range
+            /// </summary>
+            OutOfRange
         }
 
         /// <summary>
