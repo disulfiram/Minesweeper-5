@@ -12,3 +12,12 @@ C:\Users\Kao\Documents\GitHub\Minesweeper-5\MinesweeperTests\bin\Debug\Minesweep
 C:\Users\Kao\Documents\GitHub\Minesweeper-5\MinesweeperTests\bin\Debug\Minesweeper.exe
 C:\Users\Kao\Documents\GitHub\Minesweeper-5\MinesweeperTests\bin\Debug\Minesweeper.pdb
 C:\Users\Kao\Documents\GitHub\Minesweeper-5\MinesweeperTests\obj\Debug\MinesweeperTests.pdb
+C:\Programming\Minesweeper-5\MinesweeperTests\bin\Debug\MinesweeperTests.dll
+C:\Programming\Minesweeper-5\MinesweeperTests\bin\Debug\MinesweeperTests.pdb
+C:\Programming\Minesweeper-5\MinesweeperTests\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+C:\Programming\Minesweeper-5\MinesweeperTests\bin\Debug\Minesweeper.exe
+C:\Programming\Minesweeper-5\MinesweeperTests\bin\Debug\Minesweeper.pdb
+C:\Programming\Minesweeper-5\MinesweeperTests\obj\Debug\MinesweeperTests.csprojAssemblyReference.cache
+C:\Programming\Minesweeper-5\MinesweeperTests\obj\Debug\MinesweeperTests.csproj.CopyComplete
+C:\Programming\Minesweeper-5\MinesweeperTests\obj\Debug\MinesweeperTests.dll
+C:\Programming\Minesweeper-5\MinesweeperTests\obj\Debug\MinesweeperTests.pdb

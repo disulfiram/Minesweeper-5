@@ -90,8 +90,7 @@ namespace Minesweeper
         public Status OpenCell(int row, int column)
         {
             Status status;
-            if (row < 0 || row >= this.rows
-                || column < 0 || column >= this.columns)
+            if (row < 0 || row >= this.rows || column < 0 || column >= this.columns)
             {
                 status = Board.Status.OutOfRange;
                 return status;
@@ -119,9 +118,44 @@ namespace Minesweeper
                 {
                     status = Status.SuccessfullyOpened;
                 }
+
+                if (cell.Value == 0)
+                {
+                    OpenSurroundingCells(row, column);
+                }
             }
 
             return status;
+        }
+
+        /// <summary>
+        /// Opens all adjacent cells.
+        /// </summary>
+        /// <param name="row">Row number of original cell</param>
+        /// <param name="column">Column number of original cell</param>
+        private void OpenSurroundingCells(int row, int column)
+        {
+            for (int adjacentRow = row - 1; adjacentRow <= row + 1; adjacentRow++)
+            {
+                if (adjacentRow < 0 || adjacentRow >= this.rows)
+                {
+                    continue;
+                }
+                else
+                {
+                    for (int adjacentColumn = column - 1; adjacentColumn <= column + 1; adjacentColumn++)
+                    {
+                        if (adjacentColumn < 0 || adjacentColumn >= this.columns || (adjacentColumn == column && adjacentRow == row))
+                        {
+                            continue;
+                        }
+                        else
+                        {
+                            OpenCell(adjacentRow, adjacentColumn);
+                        }
+                    }
+                }
+            }
         }
 
         /// <summary>
